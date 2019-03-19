@@ -29,6 +29,8 @@ class CustomPainator(Paginator):
 def index(request):
     per_page_count = 10
     current_page = request.GET.get('p')
+    if (current_page == None):
+        current_page = 1
     current_page = int(current_page)
 
     start = (current_page - 1) * per_page_count
@@ -43,6 +45,8 @@ def index(request):
 # 在Django原生分页组件扩展自定制，只适用于Django
 def index1(request):
     current_page = request.GET.get('p')
+    if (current_page == None):
+        current_page = 1
     paginator = CustomPainator(current_page, 7, USER_LIST, 10)
     try:
         posts = paginator.page(current_page)
